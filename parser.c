@@ -62,7 +62,7 @@ enum tokenType scan()
                 tempCh = fgetc(src);
             }
             lexeme[lexLen] = '\0'; // null terminate lexeme so that it knows its the end of the lexeme
-            ungetc(tempCh, src); // put back character that is not a alpha/digit or ‘_’
+            ungetc(tempCh, src); // put back character that is not a alpha/digit or â€˜_â€™
             // see if lexeme is a reserved word, if not, return ID.
             if (strcmp(lexeme, reserved[0]) == 0)
             {
@@ -79,8 +79,6 @@ enum tokenType scan()
         }
         else if (isdigit(currentCh))
         {
-            // build lexeme for number
-            // finish fixing lexeme string, ungetc the last character read that is not a digit and then return NUMBER
             lexeme[0] = currentCh;
             lexLen = 1;
             // reads the numbers
@@ -273,7 +271,7 @@ int main(int argc, char* argv[])
 {
     extern FILE* src;
     if (argc > 1)
-    { // should be better testing for proper number of arguments, but not required for this project
+    {
         if (fopen_s(&src, argv[1], "r"))
         {
             fprintf(stderr, "Error opening source file: %s ", argv[1]);
@@ -288,4 +286,5 @@ int main(int argc, char* argv[])
     }
 
     return 0;
+
 } 
